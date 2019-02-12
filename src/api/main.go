@@ -2,8 +2,12 @@ package main
 
 import (
 	"config"
-	"fmt"
+	"encoding/json"
+	"log"
+	"net/http"
 	"weather"
+
+	"github.com/gorilla/mux"
 )
 
 func init() {
@@ -12,9 +16,20 @@ func init() {
 
 // our main function
 func main() {
-	var info weather.Info
-	info = weather.GetCityWeather("Turku")
-	fmt.Printf("Name of the city: %s\n", info.CityName)
-	fmt.Printf("City temperature: %.2f\n", info.Temperature)
 
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/cityWeather/{cityName}", CityWeather)
+	log.Fatal(http.ListenAndServe(":8000", router))
+
+}
+
+// CityWeather handles /cityWeather/{cityName} endpoint
+// Return format {"temperatrue": int, "cityName": string}
+// If cityName is empty, no weather data was found. try another city
+func CityWeather(w http.ResponseWriter, r *http.Request) {
+	var info weather.Info
+	params := mux.Vars(r)
+	info = weather.GetCityWeather(params["cityName"])
+
+	json.NewEncoder(w).Encode(info)
 }
