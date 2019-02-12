@@ -1,0 +1,10 @@
+.vscode
+pkg
+
+# ignore gorilla/mux
+src/github*
+
+# Ignore .config.json. I don't want to expose my api keys
+.config.json
+
+/api
