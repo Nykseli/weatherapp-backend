@@ -28,8 +28,14 @@ func main() {
 // If cityName is empty, no weather data was found. try another city
 func CityWeather(w http.ResponseWriter, r *http.Request) {
 	var info weather.Info
+	// Allow cross domain AJAX requests
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	params := mux.Vars(r)
 	info = weather.GetCityWeather(params["cityName"])
 
 	json.NewEncoder(w).Encode(info)
 }
+
+//TODO: Save new city api
+//TODO: Get all saved cities
