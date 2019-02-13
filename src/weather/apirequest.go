@@ -34,8 +34,8 @@ func GetCityWeather(cityName string) Info {
 	_ = err // Ingore error for now
 
 	buf.ReadFrom(resp.Body)
-	jsonSting := buf.Bytes()
-	json.Unmarshal(jsonSting, &apiResponse)
+	jsonString := buf.Bytes()
+	json.Unmarshal(jsonString, &apiResponse)
 
 	if err != nil {
 		//TODO: how to return empty Info?

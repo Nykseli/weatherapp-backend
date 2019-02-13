@@ -8,3 +8,6 @@ src/github*
 .config.json
 
 /api
+
+# Contains all the go helper packages
+bin/
