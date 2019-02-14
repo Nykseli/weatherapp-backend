@@ -1,6 +1,6 @@
 // Rest api functions
 
-package main
+package restapi
 
 import (
 	"bytes"
@@ -10,6 +10,8 @@ import (
 
 	"github.com/gorilla/mux"
 )
+
+var CityDataBase []City
 
 // CityWeather handles /cityWeather/{cityName} endpoint
 // Return format {"temperatrue": int, "cityName": string}

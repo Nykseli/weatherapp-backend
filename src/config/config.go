@@ -15,8 +15,17 @@ type Config struct {
 }
 
 // LoadConfig loads config from .config.json and load the values to global variables
-func LoadConfig() {
-	file, _ := os.Open(".config.json")
+// You can define the path or set it to empty
+// If empty try to get ./.config.json
+func LoadConfig(path string) {
+	var file *os.File
+	if len(path) != 0 {
+		file, _ = os.Open(path)
+
+	} else {
+		file, _ = os.Open(".config.json")
+
+	}
 	defer file.Close()
 	decoder := json.NewDecoder(file)
 	conf := Config{}

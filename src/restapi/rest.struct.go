@@ -1,6 +1,6 @@
 // Rest api json structs
 
-package main
+package restapi
 
 // Save contains Json data struct from /saveCity/ endpoint
 // Data City: contains weather data of single city
